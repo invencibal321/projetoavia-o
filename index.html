@@ -170,17 +170,18 @@
             cursor: pointer;
         }
 
-        /* barra de navegação */
+        /* barra de navegação - AGORA OCUPA 100% DA LARGURA */
         .nav-diagonal {
             background-color: var(--primaria);
-            margin: 0 5% 1.5rem 5%;
-            padding: 0.8rem 0;
-            clip-path: polygon(2% 0%, 100% 0%, 98% 100%, 0% 100%);
+            margin: 0;
+            padding: 0.8rem 5%;
+            clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
             border-bottom: 4px solid var(--secundaria);
+            width: 100%;
         }
 
         .nav-diagonal a {
@@ -206,7 +207,7 @@
             padding: 0 20px 40px;
         }
 
-        /* seção carrossel */
+        /* seção carrossel - SEM ESPAÇOS DAS IMAGENS */
         .carrossel-retangulos {
             margin: 30px 0 50px;
         }
@@ -255,7 +256,7 @@
             box-shadow: 0 20px 30px var(--sombra);
         }
 
-        /* ícone do produto no lugar das imagens */
+        /* ícone do produto - SEM ESPAÇOS EXTRAS */
         .produto-icon {
             width: 100%;
             height: 160px;
@@ -481,7 +482,7 @@
             <i class="fas fa-tag"></i> <span id="searchResultText"></span>
         </div>
 
-        <!-- 5 retângulos carrossel (SEM IMAGENS, APENAS ÍCONES) -->
+        <!-- Carrossel de produtos (SEM IMAGENS, APENAS ÍCONES, SEM ESPAÇOS) -->
         <section class="carrossel-retangulos">
             <h2>🔥 os mais comprados · melhores tênis</h2>
             <div class="retangulos-wrapper" id="carrosselTenis">
@@ -592,7 +593,7 @@
                 }
             });
 
-            // Banner rotativo com cores sólidas e texto animado (sem imagens externas)
+            // Banner rotativo com cores sólidas e texto animado - TEMPO ALTERADO PARA 4 SEGUNDOS
             const bannerDiv = document.getElementById('bannerImagem');
             const banners = [
                 { bg: 'linear-gradient(135deg, #1e2b3a, #c0392b)', text: '🔥 SUPER PROMOÇÃO - TÊNIS ATÉ 40% OFF 🔥' },
@@ -602,12 +603,13 @@
                 { bg: 'linear-gradient(135deg, #2b3a2b, #1e3c2c)', text: '💚 OUTLET COM DESCONTOS EXCLUSIVOS 💚' }
             ];
             let bannerIndex = 0;
+            // ALTERADO: intervalo de 4 segundos (4000ms)
             setInterval(() => {
                 bannerIndex = (bannerIndex + 1) % banners.length;
                 bannerDiv.style.background = banners[bannerIndex].bg;
                 const span = bannerDiv.querySelector('span');
                 if (span) span.innerText = banners[bannerIndex].text;
-            }, 2800);
+            }, 4000);
 
             // FUNÇÃO DE PESQUISA (barra superior)
             const searchInput = document.getElementById('searchInput');
