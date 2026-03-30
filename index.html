@@ -227,7 +227,7 @@
 
         .retangulos-wrapper {
             display: flex;
-            gap: 20px;
+            gap: 0; /* Remove espaços entre os cards */
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 15px 5px 25px;
@@ -255,6 +255,7 @@
             border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             flex-direction: column;
+            margin-right: 0; /* Garante que não haja margem direita extra */
         }
 
         .card-retangulo:hover {
@@ -494,49 +495,49 @@
         <section class="carrossel-retangulos">
             <h2>🔥 os mais comprados · melhores tênis</h2>
             <div class="retangulos-wrapper" id="carrosselTenis">
-                <div class="card-retangulo" data-name="Air Max" data-price="589.90">
+                <div class="card-retangulo" data-name="Air Max" data-price="589.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-shoe-prints"></i></div>
                     <h3>Air Max</h3>
                     <div class="info">⭐ 4.9 · 1320 vendas</div>
                     <p>Amortecimento Nike, edição limitada, conforto premium</p>
                     <span class="badge">R$ 589,90</span>
                 </div>
-                <div class="card-retangulo" data-name="Ultraboost 22" data-price="699.90">
+                <div class="card-retangulo" data-name="Ultraboost 22" data-price="699.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-running"></i></div>
                     <h3>Ultraboost 22</h3>
                     <div class="info">⭐ 4.8 · 2100 vendas</div>
                     <p>Adidas, energia máxima, retorno de energia e estilo</p>
                     <span class="badge">R$ 699,90</span>
                 </div>
-                <div class="card-retangulo" data-name="Gel-Kayano 29" data-price="549.90">
+                <div class="card-retangulo" data-name="Gel-Kayano 29" data-price="549.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-shoe-prints"></i></div>
                     <h3>Gel-Kayano 29</h3>
                     <div class="info">⭐ 4.7 · 984 vendas</div>
                     <p>Asics, estabilidade e conforto para longas distâncias</p>
                     <span class="badge">R$ 549,90</span>
                 </div>
-                <div class="card-retangulo" data-name="Road Racer" data-price="459.90">
+                <div class="card-retangulo" data-name="Road Racer" data-price="459.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-bolt"></i></div>
                     <h3>Road Racer</h3>
                     <div class="info">⭐ 4.9 · 3400 vendas</div>
                     <p>New Balance, tênis de corrida com design responsivo</p>
                     <span class="badge">R$ 459,90</span>
                 </div>
-                <div class="card-retangulo" data-name="Challenger ATR 6" data-price="629.90">
+                <div class="card-retangulo" data-name="Challenger ATR 6" data-price="629.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-mountain"></i></div>
                     <h3>Challenger ATR 6</h3>
                     <div class="info">⭐ 4.6 · 732 vendas</div>
                     <p>Hoka, tração para trilhas e máximo conforto</p>
                     <span class="badge">R$ 629,90</span>
                 </div>
-                <div class="card-retangulo" data-name="Fresh Foam V2" data-price="529.90">
+                <div class="card-retangulo" data-name="Fresh Foam V2" data-price="529.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-feather-alt"></i></div>
                     <h3>Fresh Foam V2</h3>
                     <div class="info">⭐ 4.7 · 1120 vendas</div>
                     <p>New Balance, macio e leve, ideal para uso diário</p>
                     <span class="badge">R$ 529,90</span>
                 </div>
-                <div class="card-retangulo" data-name="Ventilador Pro" data-price="399.90">
+                <div class="card-retangulo" data-name="Ventilador Pro" data-price="399.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-wind"></i></div>
                     <h3>Ventilador Pro</h3>
                     <div class="info">⭐ 4.5 · 890 vendas</div>
@@ -611,7 +612,6 @@
                 { bg: 'linear-gradient(135deg, #2b3a2b, #1e3c2c)', text: '💚 OUTLET COM DESCONTOS EXCLUSIVOS 💚' }
             ];
             let bannerIndex = 0;
-            // ALTERADO: intervalo de 4 segundos (4000ms)
             setInterval(() => {
                 bannerIndex = (bannerIndex + 1) % banners.length;
                 bannerDiv.style.background = banners[bannerIndex].bg;
@@ -629,7 +629,6 @@
             function performSearch() {
                 const query = searchInput.value.trim().toLowerCase();
                 if (query === "") {
-                    // Se vazio, mostra todos os cards
                     allCards.forEach(card => card.style.display = 'flex');
                     searchMessageDiv.style.display = 'none';
                     return;
@@ -640,7 +639,6 @@
                     const nome = card.getAttribute('data-name')?.toLowerCase() || '';
                     const preco = card.getAttribute('data-price') || '';
                     const textoCard = card.innerText.toLowerCase();
-                    // busca em nome, preço e descrição
                     if (nome.includes(query) || textoCard.includes(query) || preco.includes(query)) {
                         card.style.display = 'flex';
                         matchCount++;
@@ -657,7 +655,6 @@
                     searchMessageDiv.style.display = 'flex';
                 }
 
-                // Rolagem suave até o carrossel
                 document.querySelector('.carrossel-retangulos').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
@@ -666,44 +663,99 @@
                 if (e.key === 'Enter') performSearch();
             });
 
-            // Filtro por navegação dos links do menu
+            // NOVO: Ao clicar nos links do menu, abrir nova aba com produtos relacionados
             const navLinks = document.querySelectorAll('.nav-diagonal a');
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const category = this.getAttribute('data-category');
                     if (!category) return;
-                    
-                    let filterTerm = '';
-                    if (category === 'tenis') filterTerm = 'air max|ultraboost|gel|racer|challenger|foam';
-                    else if (category === 'roupas') filterTerm = 'camisa|short|jaqueta';
-                    else if (category === 'materiais') filterTerm = 'bola|rede|raquete';
-                    else if (category === 'marcas') filterTerm = 'nike|adidas|puma|asics|new balance';
-                    else if (category === 'promo') filterTerm = 'promo|off|desconto';
-                    
-                    if (filterTerm) {
-                        const regex = new RegExp(filterTerm, 'i');
-                        let match = 0;
-                        allCards.forEach(card => {
-                            const text = card.innerText;
-                            if (regex.test(text)) {
-                                card.style.display = 'flex';
-                                match++;
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                        searchResultTextSpan.innerText = `🏷️ Categoria ${category.toUpperCase()} · ${match} item(ns) encontrado(s)`;
-                        searchMessageDiv.style.display = 'flex';
-                    } else {
-                        allCards.forEach(card => card.style.display = 'flex');
-                        searchMessageDiv.style.display = 'none';
+
+                    // Filtrar os cards que pertencem à categoria (pelo atributo data-category)
+                    const categoryCards = Array.from(allCards).filter(card => 
+                        card.getAttribute('data-category') === category
+                    );
+
+                    // Se não houver cards para esta categoria (ex: roupas, materiais etc), mostramos uma mensagem
+                    if (categoryCards.length === 0) {
+                        alert(`Nenhum produto encontrado para a categoria "${category.toUpperCase()}".`);
+                        return;
                     }
-                    document.querySelector('.carrossel-retangulos').scrollIntoView({ behavior: 'smooth' });
+
+                    // Construir o conteúdo HTML para a nova aba
+                    const newTabContent = `
+                        <!DOCTYPE html>
+                        <html lang="pt-BR">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Buy/Sale · ${category.toUpperCase()}</title>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                            <style>
+                                * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+                                body { background: #f4f6f9; padding: 40px 20px; }
+                                .container { max-width: 1200px; margin: 0 auto; }
+                                h1 { color: #1e2b3a; border-left: 8px solid #f5b342; padding-left: 20px; margin-bottom: 30px; }
+                                .products-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+                                .card {
+                                    background: white;
+                                    border-radius: 20px;
+                                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                                    width: 280px;
+                                    padding: 20px;
+                                    transition: transform 0.2s;
+                                }
+                                .card:hover { transform: translateY(-5px); }
+                                .icon { background: linear-gradient(135deg, #1e2b3a, #2c4a6e); border-radius: 20px; height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+                                .icon i { font-size: 4rem; color: #f5b342; }
+                                h3 { color: #f5b342; margin-bottom: 8px; }
+                                .info { color: #f5b342; font-weight: bold; margin: 5px 0; }
+                                .badge { background: #1e2b3a; color: white; padding: 6px 12px; border-radius: 30px; display: inline-block; margin-top: 10px; font-weight: bold; }
+                                .back-link { display: inline-block; margin-top: 30px; color: #f5b342; text-decoration: none; font-weight: bold; }
+                                .back-link:hover { text-decoration: underline; }
+                                footer { text-align: center; margin-top: 40px; color: #666; }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <h1><i class="fas fa-tag"></i> Categoria: ${category.toUpperCase()}</h1>
+                                <div class="products-grid">
+                                    ${categoryCards.map(card => {
+                                        const iconHtml = card.querySelector('.produto-icon i').cloneNode(true);
+                                        const iconClass = iconHtml.className;
+                                        const iconString = `<i class="${iconClass}"></i>`;
+                                        const nome = card.querySelector('h3').innerText;
+                                        const info = card.querySelector('.info').innerHTML;
+                                        const desc = card.querySelector('p').innerText;
+                                        const preco = card.querySelector('.badge').innerText;
+                                        return `
+                                            <div class="card">
+                                                <div class="icon">${iconString}</div>
+                                                <h3>${nome}</h3>
+                                                <div class="info">${info}</div>
+                                                <p>${desc}</p>
+                                                <div class="badge">${preco}</div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                                <a href="#" onclick="window.close(); return false;" class="back-link"><i class="fas fa-arrow-left"></i> Fechar esta aba</a>
+                            </div>
+                            <footer>
+                                <p>Buy/Sale © 2025 · Produtos da categoria ${category.toUpperCase()}</p>
+                            </footer>
+                        </body>
+                        </html>
+                    `;
+
+                    // Abrir uma nova aba com o conteúdo gerado
+                    const newWindow = window.open();
+                    newWindow.document.write(newTabContent);
+                    newWindow.document.close();
                 });
             });
 
-            // Filtro pelos círculos (simula categorias)
+            // Filtro pelos círculos (mantido igual)
             const circles = document.querySelectorAll('.circulo');
             circles.forEach(circle => {
                 circle.addEventListener('click', function() {
