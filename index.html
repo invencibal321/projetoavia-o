@@ -48,52 +48,14 @@
             padding: 1rem 5%;
             clip-path: polygon(0 0, 100% 0, 98% 100%, 0% 100%);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 20px;
             box-shadow: 0 6px 12px var(--sombra);
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-cifrao {
-            background-color: var(--secundaria);
-            color: #0a1a1f;
-            font-size: 2rem;
-            font-weight: 800;
-            width: 55px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 30% 30% 10% 30%;
-            box-shadow: 0 4px 0 #b47d31;
-            transform: rotate(-4deg);
-            transition: 0.2s;
-        }
-
-        .logo-cifrao i {
-            font-size: 2.2rem;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: white;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
-        }
-
-        /* Barra de pesquisa */
+        /* Barra de pesquisa - agora ocupa toda a largura */
         .search-container {
-            flex: 1;
-            max-width: 450px;
-            min-width: 250px;
+            width: 100%;
         }
 
         .search-box {
@@ -104,6 +66,7 @@
             padding: 8px 18px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: all 0.3s;
+            width: 100%;
         }
 
         .search-box i {
@@ -143,6 +106,49 @@
             filter: brightness(0.95);
         }
 
+        /* container inferior do cabeçalho: logo e modo escuro lado a lado */
+        .header-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-cifrao {
+            background-color: var(--secundaria);
+            color: #0a1a1f;
+            font-size: 2rem;
+            font-weight: 800;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30% 30% 10% 30%;
+            box-shadow: 0 4px 0 #b47d31;
+            transform: rotate(-4deg);
+            transition: 0.2s;
+        }
+
+        .logo-cifrao i {
+            font-size: 2.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+        }
+
         .login-area {
             display: flex;
             gap: 20px;
@@ -170,7 +176,7 @@
             cursor: pointer;
         }
 
-        /* barra de navegação - AGORA OCUPA 100% DA LARGURA */
+        /* barra de navegação - OCUPA 100% DA LARGURA */
         .nav-diagonal {
             background-color: var(--primaria);
             margin: 0;
@@ -424,12 +430,12 @@
         }
 
         @media (max-width: 850px) {
-            .header-diagonal {
+            .header-bottom {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .search-container {
-                max-width: 100%;
+            .login-area {
+                justify-content: center;
             }
             .nav-diagonal a {
                 font-size: 0.9rem;
@@ -444,14 +450,7 @@
 </head>
 <body>
     <header class="header-diagonal">
-        <div class="logo-area">
-            <div class="logo-cifrao">
-                <i class="fas fa-dollar-sign"></i>
-            </div>
-            <span class="logo-text">BUY/SALE</span>
-        </div>
-
-        <!-- BARRA DE PESQUISA NO TOPO -->
+        <!-- BARRA DE PESQUISA NO TOPO, OCUPANDO TODA A LARGURA -->
         <div class="search-container">
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -460,11 +459,20 @@
             </div>
         </div>
 
-        <div class="login-area">
-            <label>
-                <i class="fas fa-moon" style="color:var(--secundaria);"></i> Modo escuro
-                <input type="checkbox" id="toggleDark">
-            </label>
+        <!-- CONTEÚDO INFERIOR: LOGO + MODO ESCURO -->
+        <div class="header-bottom">
+            <div class="logo-area">
+                <div class="logo-cifrao">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <span class="logo-text">BUY/SALE</span>
+            </div>
+            <div class="login-area">
+                <label>
+                    <i class="fas fa-moon" style="color:var(--secundaria);"></i> Modo escuro
+                    <input type="checkbox" id="toggleDark">
+                </label>
+            </div>
         </div>
     </header>
 
