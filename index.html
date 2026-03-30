@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buy/Sale · Artigos Esportivos</title>
-    <!-- Font Awesome para ícones -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
 
         :root {
             --primaria: #1e2b3a;
@@ -42,7 +37,7 @@
             --input-bg: #2a3a48;
         }
 
-        /* cabeçalho com efeito diagonal */
+        /* cabeçalho */
         .header-diagonal {
             background: var(--diagonal);
             padding: 1rem 5%;
@@ -53,11 +48,7 @@
             box-shadow: 0 6px 12px var(--sombra);
         }
 
-        /* Barra de pesquisa - agora ocupa toda a largura */
-        .search-container {
-            width: 100%;
-        }
-
+        .search-container { width: 100%; }
         .search-box {
             display: flex;
             align-items: center;
@@ -65,16 +56,9 @@
             border-radius: 50px;
             padding: 8px 18px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s;
             width: 100%;
         }
-
-        .search-box i {
-            color: var(--secundaria);
-            font-size: 1.1rem;
-            margin-right: 10px;
-        }
-
+        .search-box i { color: var(--secundaria); margin-right: 10px; }
         .search-box input {
             flex: 1;
             border: none;
@@ -84,11 +68,6 @@
             outline: none;
             color: var(--texto);
         }
-
-        .search-box input::placeholder {
-            color: #888;
-        }
-
         .search-box button {
             background: var(--secundaria);
             border: none;
@@ -97,16 +76,11 @@
             cursor: pointer;
             font-weight: 600;
             color: #1a1a1a;
-            transition: all 0.2s;
             margin-left: 10px;
+            transition: all 0.2s;
         }
+        .search-box button:hover { transform: scale(1.02); filter: brightness(0.95); }
 
-        .search-box button:hover {
-            transform: scale(1.02);
-            filter: brightness(0.95);
-        }
-
-        /* container inferior do cabeçalho: logo e modo escuro lado a lado */
         .header-bottom {
             display: flex;
             align-items: center;
@@ -114,18 +88,15 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-
         .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
+            cursor: pointer;
         }
-
         .logo-cifrao {
             background-color: var(--secundaria);
             color: #0a1a1f;
-            font-size: 2rem;
-            font-weight: 800;
             width: 55px;
             height: 55px;
             display: flex;
@@ -134,19 +105,102 @@
             border-radius: 30% 30% 10% 30%;
             box-shadow: 0 4px 0 #b47d31;
             transform: rotate(-4deg);
-            transition: 0.2s;
         }
-
-        .logo-cifrao i {
-            font-size: 2.2rem;
-        }
-
+        .logo-cifrao i { font-size: 2.2rem; }
         .logo-text {
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: 2px;
             color: white;
             text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+        }
+
+        /* carrinho */
+        .cart-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
+        }
+        .cart-icon i { font-size: 1.5rem; color: var(--secundaria); }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secundaria);
+            color: #1a1a1a;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* modal do carrinho */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .cart-modal-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+        .cart-modal-content h2 { margin-bottom: 20px; color: var(--secundaria); }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item-info h4 { font-size: 1rem; }
+        .cart-item-info p { font-size: 0.85rem; color: var(--secundaria); }
+        .cart-item-remove {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-total {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: right;
+            font-size: 1.2rem;
+        }
+        .close-cart {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secundaria);
         }
 
         .login-area {
@@ -158,7 +212,6 @@
             border-radius: 40px 8px 40px 8px;
             backdrop-filter: blur(4px);
         }
-
         .login-area label {
             color: white;
             font-weight: 500;
@@ -168,15 +221,13 @@
             gap: 8px;
             cursor: pointer;
         }
-
         .login-area input[type="checkbox"] {
             width: 18px;
             height: 18px;
             accent-color: var(--secundaria);
-            cursor: pointer;
         }
 
-        /* barra de navegação - OCUPA 100% DA LARGURA */
+        /* barra de navegação */
         .nav-diagonal {
             background-color: var(--primaria);
             margin: 0;
@@ -189,7 +240,6 @@
             border-bottom: 4px solid var(--secundaria);
             width: 100%;
         }
-
         .nav-diagonal a {
             color: white;
             text-decoration: none;
@@ -200,7 +250,6 @@
             background: rgba(255,255,255,0.05);
             transition: 0.2s;
         }
-
         .nav-diagonal a:hover {
             background: var(--secundaria);
             color: #0a1a1f;
@@ -213,37 +262,23 @@
             padding: 0 20px 40px;
         }
 
-        /* seção carrossel - SEM ESPAÇOS DAS IMAGENS */
-        .carrossel-retangulos {
-            margin: 30px 0 50px;
-        }
-
+        /* carrossel */
+        .carrossel-retangulos { margin: 30px 0 50px; }
         .carrossel-retangulos h2 {
             font-size: 2rem;
             margin-bottom: 20px;
             border-left: 10px solid var(--secundaria);
             padding-left: 20px;
         }
-
         .retangulos-wrapper {
             display: flex;
-            gap: 0; /* Remove espaços entre os cards */
+            gap: 0;
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 15px 5px 25px;
             scrollbar-width: thin;
             scrollbar-color: var(--secundaria) var(--primaria);
         }
-
-        .retangulos-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .retangulos-wrapper::-webkit-scrollbar-thumb {
-            background: var(--secundaria);
-            border-radius: 20px;
-        }
-
         .card-retangulo {
             min-width: 260px;
             width: 280px;
@@ -255,15 +290,9 @@
             border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             flex-direction: column;
-            margin-right: 0; /* Garante que não haja margem direita extra */
+            margin-right: 0;
         }
-
-        .card-retangulo:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 30px var(--sombra);
-        }
-
-        /* ícone do produto - SEM ESPAÇOS EXTRAS */
+        .card-retangulo:hover { transform: translateY(-8px); }
         .produto-icon {
             width: 100%;
             height: 160px;
@@ -274,32 +303,19 @@
             justify-content: center;
             margin-bottom: 12px;
         }
-
-        .produto-icon i {
-            font-size: 4.5rem;
-            color: var(--secundaria);
-            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.3));
-        }
-
+        .produto-icon i { font-size: 4.5rem; color: var(--secundaria); }
         .card-retangulo h3 {
             font-size: 1.5rem;
             margin: 12px 0 4px;
             color: var(--secundaria);
         }
-
         .card-retangulo .info {
             font-weight: 600;
             color: var(--secundaria);
             font-size: 0.95rem;
             margin: 5px 0;
         }
-
-        .card-retangulo p {
-            font-size: 0.9rem;
-            margin: 8px 0;
-            opacity: 0.9;
-        }
-
+        .card-retangulo p { font-size: 0.9rem; margin: 8px 0; opacity: 0.9; }
         .card-retangulo .badge {
             background: var(--primaria);
             color: white;
@@ -309,26 +325,31 @@
             font-weight: bold;
             align-self: flex-start;
             margin-top: 8px;
+        }
+        .add-to-cart {
+            background: var(--secundaria);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
             transition: 0.2s;
         }
-
+        .add-to-cart:hover { transform: scale(1.02); filter: brightness(0.95); }
         body.dark .card-retangulo .badge {
             background: var(--secundaria);
             color: #1a1a1a;
         }
 
         /* círculos */
-        .circulos-section {
-            margin: 60px 0;
-        }
-
+        .circulos-section { margin: 60px 0; }
         .circulos-wrapper {
             display: flex;
             justify-content: center;
             gap: 2.5rem;
             flex-wrap: wrap;
         }
-
         .circulo {
             width: 150px;
             height: 150px;
@@ -347,44 +368,30 @@
             padding: 10px;
             cursor: pointer;
         }
+        .circulo i { font-size: 2.8rem; margin-bottom: 8px; color: var(--secundaria); }
+        .circulo span { font-size: 1.1rem; }
+        .circulo small { font-size: 0.8rem; opacity: 0.8; }
+        .circulo:hover { transform: scale(1.07); border-color: white; }
 
-        .circulo i {
-            font-size: 2.8rem;
-            margin-bottom: 8px;
-            color: var(--secundaria);
-        }
-
-        .circulo span {
-            font-size: 1.1rem;
-        }
-
-        .circulo small {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        .circulo:hover {
-            transform: scale(1.07);
-            border-color: white;
-        }
-
-        /* banner rotativo */
+        /* banner clicável */
         .banner-rotativo {
             margin: 50px 0 30px;
             width: 100%;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 30px 40px var(--sombra);
-            background: linear-gradient(135deg, var(--primaria), #2c3e50);
             aspect-ratio: 16 / 6;
         }
-
+        .banner-link {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
         .banner-quad-grid {
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 0.6s ease-in-out;
+            transition: background 0.6s ease-in-out;
             display: flex;
             align-items: flex-end;
             padding: 25px;
@@ -392,9 +399,7 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(120deg, #1e2b3a, #2c4a6e);
         }
-
         .banner-quad-grid span {
             background: rgba(0,0,0,0.6);
             padding: 12px 28px;
@@ -405,7 +410,6 @@
             font-weight: 600;
         }
 
-        /* mensagem de pesquisa */
         .search-message {
             text-align: center;
             padding: 20px;
@@ -415,13 +419,6 @@
             display: none;
             box-shadow: 0 4px 12px var(--sombra);
         }
-
-        .search-message i {
-            color: var(--secundaria);
-            font-size: 2rem;
-            margin-right: 12px;
-        }
-
         footer {
             text-align: center;
             padding: 30px 0 20px;
@@ -429,29 +426,16 @@
             border-top: 1px solid rgba(128,128,128,0.2);
             margin-top: 30px;
         }
-
         @media (max-width: 850px) {
-            .header-bottom {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .login-area {
-                justify-content: center;
-            }
-            .nav-diagonal a {
-                font-size: 0.9rem;
-                padding: 0.2rem 0.8rem;
-            }
-            .banner-quad-grid span {
-                font-size: 1rem;
-                padding: 8px 16px;
-            }
+            .header-bottom { flex-direction: column; align-items: stretch; }
+            .cart-area { justify-content: flex-end; }
+            .nav-diagonal a { font-size: 0.9rem; padding: 0.2rem 0.8rem; }
+            .banner-quad-grid span { font-size: 1rem; padding: 8px 16px; }
         }
     </style>
 </head>
 <body>
     <header class="header-diagonal">
-        <!-- BARRA DE PESQUISA NO TOPO, OCUPANDO TODA A LARGURA -->
         <div class="search-container">
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -460,19 +444,22 @@
             </div>
         </div>
 
-        <!-- CONTEÚDO INFERIOR: LOGO + MODO ESCURO -->
         <div class="header-bottom">
             <div class="logo-area">
-                <div class="logo-cifrao">
-                    <i class="fas fa-dollar-sign"></i>
-                </div>
+                <div class="logo-cifrao"><i class="fas fa-dollar-sign"></i></div>
                 <span class="logo-text">BUY/SALE</span>
             </div>
-            <div class="login-area">
-                <label>
-                    <i class="fas fa-moon" style="color:var(--secundaria);"></i> Modo escuro
-                    <input type="checkbox" id="toggleDark">
-                </label>
+            <div class="cart-area">
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <div class="login-area">
+                    <label>
+                        <i class="fas fa-moon" style="color:var(--secundaria);"></i> Modo escuro
+                        <input type="checkbox" id="toggleDark">
+                    </label>
+                </div>
             </div>
         </div>
     </header>
@@ -481,96 +468,169 @@
         <a href="#" data-category="tenis">TÊNIS</a>
         <a href="#" data-category="roupas">ROUPAS</a>
         <a href="#" data-category="materiais">MATERIAIS</a>
-        <a href="#" data-category="marcas">MARCAS</a>
-        <a href="#" data-category="promo">PROMO</a>
+        <a href="#" data-category="equipamentos">EQUIPAMENTOS</a>
+        <a href="#" data-category="acessorios">ACESSÓRIOS</a>
+        <a href="#" data-category="outlet">OUTLET</a>
     </nav>
 
     <main class="container">
-        <!-- Mensagem de resultados da pesquisa -->
         <div id="searchMessage" class="search-message">
             <i class="fas fa-tag"></i> <span id="searchResultText"></span>
         </div>
 
-        <!-- Carrossel de produtos (SEM IMAGENS, APENAS ÍCONES, SEM ESPAÇOS) -->
         <section class="carrossel-retangulos">
-            <h2>🔥 os mais comprados · melhores tênis</h2>
+            <h2>🔥 os mais comprados · variedade esportiva</h2>
             <div class="retangulos-wrapper" id="carrosselTenis">
+                <!-- TÊNIS -->
                 <div class="card-retangulo" data-name="Air Max" data-price="589.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-shoe-prints"></i></div>
                     <h3>Air Max</h3>
                     <div class="info">⭐ 4.9 · 1320 vendas</div>
-                    <p>Amortecimento Nike, edição limitada, conforto premium</p>
+                    <p>Amortecimento Nike, edição limitada</p>
                     <span class="badge">R$ 589,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
                 </div>
                 <div class="card-retangulo" data-name="Ultraboost 22" data-price="699.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-running"></i></div>
                     <h3>Ultraboost 22</h3>
                     <div class="info">⭐ 4.8 · 2100 vendas</div>
-                    <p>Adidas, energia máxima, retorno de energia e estilo</p>
+                    <p>Adidas, energia máxima</p>
                     <span class="badge">R$ 699,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
                 </div>
                 <div class="card-retangulo" data-name="Gel-Kayano 29" data-price="549.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-shoe-prints"></i></div>
                     <h3>Gel-Kayano 29</h3>
                     <div class="info">⭐ 4.7 · 984 vendas</div>
-                    <p>Asics, estabilidade e conforto para longas distâncias</p>
+                    <p>Asics, estabilidade e conforto</p>
                     <span class="badge">R$ 549,90</span>
-                </div>
-                <div class="card-retangulo" data-name="Road Racer" data-price="459.90" data-category="tenis">
-                    <div class="produto-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Road Racer</h3>
-                    <div class="info">⭐ 4.9 · 3400 vendas</div>
-                    <p>New Balance, tênis de corrida com design responsivo</p>
-                    <span class="badge">R$ 459,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
                 </div>
                 <div class="card-retangulo" data-name="Challenger ATR 6" data-price="629.90" data-category="tenis">
                     <div class="produto-icon"><i class="fas fa-mountain"></i></div>
                     <h3>Challenger ATR 6</h3>
                     <div class="info">⭐ 4.6 · 732 vendas</div>
-                    <p>Hoka, tração para trilhas e máximo conforto</p>
+                    <p>Hoka, trilha e conforto</p>
                     <span class="badge">R$ 629,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
                 </div>
-                <div class="card-retangulo" data-name="Fresh Foam V2" data-price="529.90" data-category="tenis">
-                    <div class="produto-icon"><i class="fas fa-feather-alt"></i></div>
-                    <h3>Fresh Foam V2</h3>
-                    <div class="info">⭐ 4.7 · 1120 vendas</div>
-                    <p>New Balance, macio e leve, ideal para uso diário</p>
-                    <span class="badge">R$ 529,90</span>
+
+                <!-- ROUPAS -->
+                <div class="card-retangulo" data-name="Camisa Dry Fit" data-price="129.90" data-category="roupas">
+                    <div class="produto-icon"><i class="fas fa-tshirt"></i></div>
+                    <h3>Camisa Dry Fit</h3>
+                    <div class="info">⭐ 4.8 · 540 vendas</div>
+                    <p>Tecnologia anti-suor, leve e confortável</p>
+                    <span class="badge">R$ 129,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
                 </div>
-                <div class="card-retangulo" data-name="Ventilador Pro" data-price="399.90" data-category="tenis">
-                    <div class="produto-icon"><i class="fas fa-wind"></i></div>
-                    <h3>Ventilador Pro</h3>
-                    <div class="info">⭐ 4.5 · 890 vendas</div>
-                    <p>Máxima ventilação, cabedal respirável</p>
-                    <span class="badge">R$ 399,90</span>
+                <div class="card-retangulo" data-name="Short Runner" data-price="89.90" data-category="roupas">
+                    <div class="produto-icon"><i class="fas fa-shorts"></i></div>
+                    <h3>Short Runner</h3>
+                    <div class="info">⭐ 4.7 · 890 vendas</div>
+                    <p>Elástico, respirável, ideal para corrida</p>
+                    <span class="badge">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+
+                <!-- MATERIAIS -->
+                <div class="card-retangulo" data-name="Bola de Futebol" data-price="149.90" data-category="materiais">
+                    <div class="produto-icon"><i class="fas fa-futbol"></i></div>
+                    <h3>Bola Oficial</h3>
+                    <div class="info">⭐ 4.9 · 2300 vendas</div>
+                    <p>Costurada a máquina, alta durabilidade</p>
+                    <span class="badge">R$ 149,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+                <div class="card-retangulo" data-name="Rede de Vôlei" data-price="199.90" data-category="materiais">
+                    <div class="produto-icon"><i class="fas fa-volleyball-ball"></i></div>
+                    <h3>Rede Profissional</h3>
+                    <div class="info">⭐ 4.6 · 420 vendas</div>
+                    <p>Náilon reforçado, regulável</p>
+                    <span class="badge">R$ 199,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+
+                <!-- EQUIPAMENTOS -->
+                <div class="card-retangulo" data-name="Bicicleta Aro 29" data-price="1899.90" data-category="equipamentos">
+                    <div class="produto-icon"><i class="fas fa-bicycle"></i></div>
+                    <h3>Bike MTB</h3>
+                    <div class="info">⭐ 4.8 · 150 vendas</div>
+                    <p>Freio a disco, suspensão, 21 marchas</p>
+                    <span class="badge">R$ 1.899,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+                <div class="card-retangulo" data-name="Capacete Ciclismo" data-price="299.90" data-category="equipamentos">
+                    <div class="produto-icon"><i class="fas fa-helmet-safety"></i></div>
+                    <h3>Capacete Aero</h3>
+                    <div class="info">⭐ 4.7 · 380 vendas</div>
+                    <p>Ajuste ergonômico, leve e resistente</p>
+                    <span class="badge">R$ 299,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+
+                <!-- ACESSÓRIOS -->
+                <div class="card-retangulo" data-name="Mochila Esportiva" data-price="179.90" data-category="acessorios">
+                    <div class="produto-icon"><i class="fas fa-bag-shopping"></i></div>
+                    <h3>Mochila 30L</h3>
+                    <div class="info">⭐ 4.8 · 670 vendas</div>
+                    <p>Compartimento para notebook, resistente à água</p>
+                    <span class="badge">R$ 179,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+                <div class="card-retangulo" data-name="Garrafa Térmica" data-price="59.90" data-category="acessorios">
+                    <div class="produto-icon"><i class="fas fa-tint"></i></div>
+                    <h3>Garrafa 750ml</h3>
+                    <div class="info">⭐ 4.9 · 1250 vendas</div>
+                    <p>Aço inox, mantém temperatura</p>
+                    <span class="badge">R$ 59,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+
+                <!-- OUTLET -->
+                <div class="card-retangulo" data-name="Tênis Promo Raptor" data-price="299.90" data-category="outlet">
+                    <div class="produto-icon"><i class="fas fa-shoe-prints"></i></div>
+                    <h3>Raptor Run</h3>
+                    <div class="info">⭐ 4.5 · 990 vendas</div>
+                    <p>Oferta imperdível, estoque limitado</p>
+                    <span class="badge">R$ 299,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+                <div class="card-retangulo" data-name="Jaqueta Corta-vento" data-price="149.90" data-category="outlet">
+                    <div class="produto-icon"><i class="fas fa-vest"></i></div>
+                    <h3>Jaqueta Outlet</h3>
+                    <div class="info">⭐ 4.4 · 430 vendas</div>
+                    <p>Impermeável, ideal para trilhas</p>
+                    <span class="badge">R$ 149,90</span>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
                 </div>
             </div>
         </section>
 
-        <!-- 5 círculos -->
+        <!-- 5 círculos (agora abrem nova aba) -->
         <section class="circulos-section">
             <div class="circulos-wrapper">
-                <div class="circulo" data-filter="roupas">
+                <div class="circulo" data-category="roupas">
                     <i class="fas fa-tshirt"></i>
                     <span>Roupas</span>
                     <small>camisas, shorts</small>
                 </div>
-                <div class="circulo" data-filter="materiais">
+                <div class="circulo" data-category="materiais">
                     <i class="fas fa-futbol"></i>
                     <span>Materiais</span>
                     <small>bolas, redes</small>
                 </div>
-                <div class="circulo" data-filter="equipamentos">
+                <div class="circulo" data-category="equipamentos">
                     <i class="fas fa-bicycle"></i>
                     <span>Equipamentos</span>
-                    <small>acessórios</small>
+                    <small>bicicletas, capacetes</small>
                 </div>
-                <div class="circulo" data-filter="esportes">
+                <div class="circulo" data-category="acessorios">
                     <i class="fas fa-medal"></i>
-                    <span>Esportes</span>
-                    <small>top marcas</small>
+                    <span>Acessórios</span>
+                    <small>mochilas, garrafas</small>
                 </div>
-                <div class="circulo" data-filter="outlet">
+                <div class="circulo" data-category="outlet">
                     <i class="fas fa-tag"></i>
                     <span>Outlet</span>
                     <small>até 50% off</small>
@@ -578,11 +638,13 @@
             </div>
         </section>
 
-        <!-- banner rotativo -->
+        <!-- Banner rotativo clicável -->
         <section class="banner-rotativo" id="bannerRotativo">
-            <div class="banner-quad-grid" id="bannerImagem">
-                <span>🔥 OFERTAS IMPERDÍVEIS 🔥</span>
-            </div>
+            <a href="#" id="bannerLink" class="banner-link" target="_blank">
+                <div class="banner-quad-grid" id="bannerImagem">
+                    <span>🔥 OFERTAS IMPERDÍVEIS 🔥</span>
+                </div>
+            </a>
         </section>
     </main>
 
@@ -590,36 +652,121 @@
         <p>Buy/Sale © 2025 · compra e venda de artigos esportivos · <i class="fas fa-dollar-sign" style="color: var(--secundaria);"></i> | Frete Grátis para todo Brasil</p>
     </footer>
 
+    <!-- Modal do carrinho -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-cart">&times;</span>
+            <h2>Seu Carrinho</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total" id="cartTotal">Total: R$ 0,00</div>
+        </div>
+    </div>
+
     <script>
         (function() {
-            // Alternância de tema escuro
+            // ========== TEMA ESCURO ==========
             const darkToggle = document.getElementById('toggleDark');
             darkToggle.addEventListener('change', function(e) {
-                if (this.checked) {
-                    document.body.classList.add('dark');
-                } else {
-                    document.body.classList.remove('dark');
-                }
+                if (this.checked) document.body.classList.add('dark');
+                else document.body.classList.remove('dark');
             });
 
-            // Banner rotativo com cores sólidas e texto animado - TEMPO ALTERADO PARA 4 SEGUNDOS
+            // ========== BANNER ROTATIVO COM LINKS ==========
             const bannerDiv = document.getElementById('bannerImagem');
+            const bannerLink = document.getElementById('bannerLink');
             const banners = [
-                { bg: 'linear-gradient(135deg, #1e2b3a, #c0392b)', text: '🔥 SUPER PROMOÇÃO - TÊNIS ATÉ 40% OFF 🔥' },
-                { bg: 'linear-gradient(135deg, #0f2027, #2c5364)', text: '⚡ NOVIDADES 2025 - COMPRE JÁ ⚡' },
-                { bg: 'linear-gradient(135deg, #232526, #414345)', text: '🏆 MELHORES MARCAS: NIKE, ADIDAS, PUMA 🏆' },
-                { bg: 'linear-gradient(135deg, #1f1c2c, #2a2a3a)', text: '🎯 FRETE GRÁTIS NAS COMPRAS ACIMA DE R$299 🎯' },
-                { bg: 'linear-gradient(135deg, #2b3a2b, #1e3c2c)', text: '💚 OUTLET COM DESCONTOS EXCLUSIVOS 💚' }
+                { bg: 'linear-gradient(135deg, #1e2b3a, #c0392b)', text: '🔥 SUPER PROMOÇÃO - TÊNIS ATÉ 40% OFF 🔥', link: 'https://www.nike.com.br/promocoes' },
+                { bg: 'linear-gradient(135deg, #0f2027, #2c5364)', text: '⚡ NOVIDADES 2025 - COMPRE JÁ ⚡', link: 'https://www.adidas.com.br/lancamentos' },
+                { bg: 'linear-gradient(135deg, #232526, #414345)', text: '🏆 MELHORES MARCAS: NIKE, ADIDAS, PUMA 🏆', link: 'https://www.puma.com.br/novidades' },
+                { bg: 'linear-gradient(135deg, #1f1c2c, #2a2a3a)', text: '🎯 FRETE GRÁTIS NAS COMPRAS ACIMA DE R$299 🎯', link: 'https://www.centauro.com.br/frete-gratis' },
+                { bg: 'linear-gradient(135deg, #2b3a2b, #1e3c2c)', text: '💚 OUTLET COM DESCONTOS EXCLUSIVOS 💚', link: 'https://www.outletesportivo.com.br' }
             ];
             let bannerIndex = 0;
-            setInterval(() => {
-                bannerIndex = (bannerIndex + 1) % banners.length;
+            function updateBanner() {
                 bannerDiv.style.background = banners[bannerIndex].bg;
                 const span = bannerDiv.querySelector('span');
                 if (span) span.innerText = banners[bannerIndex].text;
+                bannerLink.href = banners[bannerIndex].link;
+            }
+            updateBanner();
+            setInterval(() => {
+                bannerIndex = (bannerIndex + 1) % banners.length;
+                updateBanner();
             }, 4000);
 
-            // FUNÇÃO DE PESQUISA (barra superior)
+            // ========== CARRINHO ==========
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartIcon = document.getElementById('cartIcon');
+            const cartModal = document.getElementById('cartModal');
+            const closeCart = document.querySelector('.close-cart');
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartTotalSpan = document.getElementById('cartTotal');
+            const cartCountSpan = document.getElementById('cartCount');
+
+            function saveCart() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartUI();
+            }
+
+            function updateCartUI() {
+                let total = 0;
+                cartItemsDiv.innerHTML = '';
+                if (cart.length === 0) {
+                    cartItemsDiv.innerHTML = '<p>Carrinho vazio</p>';
+                } else {
+                    cart.forEach((item, index) => {
+                        total += item.price;
+                        const div = document.createElement('div');
+                        div.className = 'cart-item';
+                        div.innerHTML = `
+                            <div class="cart-item-info">
+                                <h4>${item.name}</h4>
+                                <p>R$ ${item.price.toFixed(2)}</p>
+                            </div>
+                            <button class="cart-item-remove" data-index="${index}">Remover</button>
+                        `;
+                        cartItemsDiv.appendChild(div);
+                    });
+                    document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const idx = parseInt(btn.getAttribute('data-index'));
+                            cart.splice(idx, 1);
+                            saveCart();
+                        });
+                    });
+                }
+                cartTotalSpan.innerText = `Total: R$ ${total.toFixed(2)}`;
+                cartCountSpan.innerText = cart.length;
+            }
+
+            function addToCart(product) {
+                cart.push(product);
+                saveCart();
+            }
+
+            // Eventos dos botões "Adicionar ao carrinho"
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const card = btn.closest('.card-retangulo');
+                    const name = card.querySelector('h3').innerText;
+                    const priceText = card.querySelector('.badge').innerText.replace('R$ ', '').replace(',', '.');
+                    const price = parseFloat(priceText);
+                    addToCart({ name, price });
+                });
+            });
+
+            cartIcon.addEventListener('click', () => {
+                cartModal.style.display = 'flex';
+            });
+            closeCart.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === cartModal) cartModal.style.display = 'none';
+            });
+            updateCartUI();
+
+            // ========== PESQUISA ==========
             const searchInput = document.getElementById('searchInput');
             const searchBtn = document.getElementById('searchBtn');
             const searchMessageDiv = document.getElementById('searchMessage');
@@ -633,7 +780,6 @@
                     searchMessageDiv.style.display = 'none';
                     return;
                 }
-
                 let matchCount = 0;
                 allCards.forEach(card => {
                     const nome = card.getAttribute('data-name')?.toLowerCase() || '';
@@ -646,7 +792,6 @@
                         card.style.display = 'none';
                     }
                 });
-
                 if (matchCount > 0) {
                     searchResultTextSpan.innerText = `🔍 ${matchCount} resultado(s) encontrado(s) para "${searchInput.value}"`;
                     searchMessageDiv.style.display = 'flex';
@@ -654,144 +799,110 @@
                     searchResultTextSpan.innerText = `😕 Nenhum produto encontrado para "${searchInput.value}". Tente outro termo!`;
                     searchMessageDiv.style.display = 'flex';
                 }
-
                 document.querySelector('.carrossel-retangulos').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-
             searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') performSearch();
-            });
+            searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
 
-            // NOVO: Ao clicar nos links do menu, abrir nova aba com produtos relacionados
+            // ========== ABRIR NOVA ABA NOS MENUS (links e círculos) ==========
+            function openCategoryTab(category) {
+                const categoryCards = Array.from(allCards).filter(card => 
+                    card.getAttribute('data-category') === category
+                );
+                if (categoryCards.length === 0) {
+                    alert(`Nenhum produto encontrado para a categoria "${category.toUpperCase()}".`);
+                    return;
+                }
+                const newTabContent = `
+                    <!DOCTYPE html>
+                    <html lang="pt-BR">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Buy/Sale · ${category.toUpperCase()}</title>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                        <style>
+                            * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+                            body { background: #f4f6f9; padding: 40px 20px; }
+                            .container { max-width: 1200px; margin: 0 auto; }
+                            h1 { color: #1e2b3a; border-left: 8px solid #f5b342; padding-left: 20px; margin-bottom: 30px; }
+                            .products-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+                            .card {
+                                background: white;
+                                border-radius: 20px;
+                                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                                width: 280px;
+                                padding: 20px;
+                                transition: transform 0.2s;
+                            }
+                            .card:hover { transform: translateY(-5px); }
+                            .icon { background: linear-gradient(135deg, #1e2b3a, #2c4a6e); border-radius: 20px; height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+                            .icon i { font-size: 4rem; color: #f5b342; }
+                            h3 { color: #f5b342; margin-bottom: 8px; }
+                            .info { color: #f5b342; font-weight: bold; margin: 5px 0; }
+                            .badge { background: #1e2b3a; color: white; padding: 6px 12px; border-radius: 30px; display: inline-block; margin-top: 10px; font-weight: bold; }
+                            .back-link { display: inline-block; margin-top: 30px; color: #f5b342; text-decoration: none; font-weight: bold; }
+                            footer { text-align: center; margin-top: 40px; color: #666; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <h1><i class="fas fa-tag"></i> Categoria: ${category.toUpperCase()}</h1>
+                            <div class="products-grid">
+                                ${categoryCards.map(card => {
+                                    const iconHtml = card.querySelector('.produto-icon i').cloneNode(true);
+                                    const iconClass = iconHtml.className;
+                                    const iconString = `<i class="${iconClass}"></i>`;
+                                    const nome = card.querySelector('h3').innerText;
+                                    const info = card.querySelector('.info').innerHTML;
+                                    const desc = card.querySelector('p').innerText;
+                                    const preco = card.querySelector('.badge').innerText;
+                                    return `
+                                        <div class="card">
+                                            <div class="icon">${iconString}</div>
+                                            <h3>${nome}</h3>
+                                            <div class="info">${info}</div>
+                                            <p>${desc}</p>
+                                            <div class="badge">${preco}</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                            <a href="#" onclick="window.close(); return false;" class="back-link"><i class="fas fa-arrow-left"></i> Fechar esta aba</a>
+                        </div>
+                        <footer>
+                            <p>Buy/Sale © 2025 · Produtos da categoria ${category.toUpperCase()}</p>
+                        </footer>
+                    </body>
+                    </html>
+                `;
+                const newWindow = window.open();
+                newWindow.document.write(newTabContent);
+                newWindow.document.close();
+            }
+
+            // Links do menu superior
             const navLinks = document.querySelectorAll('.nav-diagonal a');
             navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const category = this.getAttribute('data-category');
-                    if (!category) return;
-
-                    // Filtrar os cards que pertencem à categoria (pelo atributo data-category)
-                    const categoryCards = Array.from(allCards).filter(card => 
-                        card.getAttribute('data-category') === category
-                    );
-
-                    // Se não houver cards para esta categoria (ex: roupas, materiais etc), mostramos uma mensagem
-                    if (categoryCards.length === 0) {
-                        alert(`Nenhum produto encontrado para a categoria "${category.toUpperCase()}".`);
-                        return;
-                    }
-
-                    // Construir o conteúdo HTML para a nova aba
-                    const newTabContent = `
-                        <!DOCTYPE html>
-                        <html lang="pt-BR">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Buy/Sale · ${category.toUpperCase()}</title>
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-                            <style>
-                                * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-                                body { background: #f4f6f9; padding: 40px 20px; }
-                                .container { max-width: 1200px; margin: 0 auto; }
-                                h1 { color: #1e2b3a; border-left: 8px solid #f5b342; padding-left: 20px; margin-bottom: 30px; }
-                                .products-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-                                .card {
-                                    background: white;
-                                    border-radius: 20px;
-                                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                                    width: 280px;
-                                    padding: 20px;
-                                    transition: transform 0.2s;
-                                }
-                                .card:hover { transform: translateY(-5px); }
-                                .icon { background: linear-gradient(135deg, #1e2b3a, #2c4a6e); border-radius: 20px; height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
-                                .icon i { font-size: 4rem; color: #f5b342; }
-                                h3 { color: #f5b342; margin-bottom: 8px; }
-                                .info { color: #f5b342; font-weight: bold; margin: 5px 0; }
-                                .badge { background: #1e2b3a; color: white; padding: 6px 12px; border-radius: 30px; display: inline-block; margin-top: 10px; font-weight: bold; }
-                                .back-link { display: inline-block; margin-top: 30px; color: #f5b342; text-decoration: none; font-weight: bold; }
-                                .back-link:hover { text-decoration: underline; }
-                                footer { text-align: center; margin-top: 40px; color: #666; }
-                            </style>
-                        </head>
-                        <body>
-                            <div class="container">
-                                <h1><i class="fas fa-tag"></i> Categoria: ${category.toUpperCase()}</h1>
-                                <div class="products-grid">
-                                    ${categoryCards.map(card => {
-                                        const iconHtml = card.querySelector('.produto-icon i').cloneNode(true);
-                                        const iconClass = iconHtml.className;
-                                        const iconString = `<i class="${iconClass}"></i>`;
-                                        const nome = card.querySelector('h3').innerText;
-                                        const info = card.querySelector('.info').innerHTML;
-                                        const desc = card.querySelector('p').innerText;
-                                        const preco = card.querySelector('.badge').innerText;
-                                        return `
-                                            <div class="card">
-                                                <div class="icon">${iconString}</div>
-                                                <h3>${nome}</h3>
-                                                <div class="info">${info}</div>
-                                                <p>${desc}</p>
-                                                <div class="badge">${preco}</div>
-                                            </div>
-                                        `;
-                                    }).join('')}
-                                </div>
-                                <a href="#" onclick="window.close(); return false;" class="back-link"><i class="fas fa-arrow-left"></i> Fechar esta aba</a>
-                            </div>
-                            <footer>
-                                <p>Buy/Sale © 2025 · Produtos da categoria ${category.toUpperCase()}</p>
-                            </footer>
-                        </body>
-                        </html>
-                    `;
-
-                    // Abrir uma nova aba com o conteúdo gerado
-                    const newWindow = window.open();
-                    newWindow.document.write(newTabContent);
-                    newWindow.document.close();
+                    const category = link.getAttribute('data-category');
+                    if (category) openCategoryTab(category);
                 });
             });
 
-            // Filtro pelos círculos (mantido igual)
+            // Círculos (agora todos abrem nova aba)
             const circles = document.querySelectorAll('.circulo');
             circles.forEach(circle => {
-                circle.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
-                    let keyword = '';
-                    if (filter === 'roupas') keyword = 'camisa|short|jaqueta|roupa';
-                    else if (filter === 'materiais') keyword = 'bola|rede|acessório';
-                    else if (filter === 'equipamentos') keyword = 'bicicleta|capacete|luva';
-                    else if (filter === 'esportes') keyword = 'medalha|esporte|futebol|basquete';
-                    else if (filter === 'outlet') keyword = 'off|desconto|promo';
-                    
-                    if (keyword) {
-                        const regex = new RegExp(keyword, 'i');
-                        let count = 0;
-                        allCards.forEach(card => {
-                            if (regex.test(card.innerText)) {
-                                card.style.display = 'flex';
-                                count++;
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                        searchResultTextSpan.innerText = `✨ ${this.querySelector('span')?.innerText || filter}: ${count} produtos disponíveis ✨`;
-                        searchMessageDiv.style.display = 'flex';
-                    } else {
-                        allCards.forEach(card => card.style.display = 'flex');
-                        searchMessageDiv.style.display = 'none';
-                    }
-                    document.querySelector('.carrossel-retangulos').scrollIntoView({ behavior: 'smooth' });
+                circle.addEventListener('click', () => {
+                    const category = circle.getAttribute('data-category');
+                    if (category) openCategoryTab(category);
                 });
             });
 
-            // Botão de reset visual: se clicar no logo, volta todos os cards
+            // Reset ao clicar no logo
             const logoArea = document.querySelector('.logo-area');
             if (logoArea) {
-                logoArea.style.cursor = 'pointer';
                 logoArea.addEventListener('click', () => {
                     allCards.forEach(card => card.style.display = 'flex');
                     searchInput.value = '';
